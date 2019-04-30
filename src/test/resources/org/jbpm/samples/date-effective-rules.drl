@@ -1,0 +1,11 @@
+//created on: Apr 24, 2019
+package org.jbpm.samples
+
+rule "date effective may 01, 2019"
+date-effective "01-may-2019"
+ruleflow-group "date-effective"
+    when
+    then
+    	System.out.println("----> rule fired - " + drools.getRule().getName());
+
+end

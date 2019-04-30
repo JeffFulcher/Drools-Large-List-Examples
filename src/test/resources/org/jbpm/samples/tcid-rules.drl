@@ -1,0 +1,98 @@
+//created on: Apr 24, 2019
+package org.jbpm.samples
+
+import org.jbpm.samples.model.Reservation;
+import org.jbpm.samples.model.TCIDMap;
+import org.jbpm.samples.model.HotelCodeMap;
+import org.jbpm.samples.model.TravelAgent;
+import org.jbpm.samples.model.ReservationResults;
+import org.jbpm.samples.model.Hotel; 
+import java.time.LocalDate;
+
+rule "localDate Test"
+when
+	$reservation : Reservation(eval(checkoutDate.isBefore(LocalDate.parse("2018-06-11"))), eval(checkoutDate.isAfter(LocalDate.parse("2016-06-11"))) )
+then
+	System.out.println("----> rule [" + drools.getRule().getName() + "] for " + $reservation);
+end
+
+rule "group EXPEDIA hotel match"
+    when
+    	$hotelMap : HotelCodeMap()
+    	$res : Reservation()
+    	$hotel : Hotel($hotelCode : hotelCode != null && $hotelMap[$hotelCode] contains "EXPEDIA") from $res.getHotel()
+    then
+    	System.out.println("----> rule [" + drools.getRule().getName() + "] for " + $res);
+    	$res.getResults().setPercentSunday(0.1);
+    	$res.getResults().setPercentMonday(0.1);
+    	$res.getResults().setPercentTuesday(0.1);
+    	$res.getResults().setPercentWednesday(0.1);
+    	$res.getResults().setPercentThursday(0.1);
+    	$res.getResults().setPercentFriday(0.1);
+    	$res.getResults().setPercentSaturday(0.1);
+end
+
+rule "group PARHB match"
+    when
+    	$tcIdMap : TCIDMap()
+    	$res : Reservation()
+    	$travelAgent: TravelAgent($tcId : travelConsultId != null && $tcIdMap[$tcId] contains "PARHB") from $res.getTravelAgent()
+    then
+    	System.out.println("----> rule [" + drools.getRule().getName() + "] for " + $res);
+    	$res.getResults().setPercentSunday(0.1);
+    	$res.getResults().setPercentMonday(0.1);
+    	$res.getResults().setPercentTuesday(0.1);
+    	$res.getResults().setPercentWednesday(0.1);
+    	$res.getResults().setPercentThursday(0.1);
+    	$res.getResults().setPercentFriday(0.1);
+    	$res.getResults().setPercentSaturday(0.1);
+end
+
+rule "group LEEKS match"
+    when
+    	$tcIdMap : TCIDMap()
+    	$res : Reservation()
+    	$travelAgent: TravelAgent($tcId : travelConsultId != null && $tcIdMap[$tcId] contains "LEEKS") from $res.getTravelAgent()
+    then
+    	System.out.println("----> rule [" + drools.getRule().getName() + "] for " + $res);
+    	$res.getResults().setPercentSunday(0.2);
+    	$res.getResults().setPercentMonday(0.2);
+    	$res.getResults().setPercentTuesday(0.2);
+    	$res.getResults().setPercentWednesday(0.2);
+    	$res.getResults().setPercentThursday(0.2);
+    	$res.getResults().setPercentFriday(0.2);
+    	$res.getResults().setPercentSaturday(0.2);
+
+end
+
+rule "group LONLP match"
+    when
+    	$tcIdMap : TCIDMap()
+    	$res : Reservation()
+    	$travelAgent: TravelAgent($tcId : travelConsultId != null && $tcIdMap[$tcId] contains "LONLP") from $res.getTravelAgent()
+    then
+    	System.out.println("----> rule [" + drools.getRule().getName() + "] for " + $res);
+    	$res.getResults().setPercentSunday(0.3);
+    	$res.getResults().setPercentMonday(0.3);
+    	$res.getResults().setPercentTuesday(0.3);
+    	$res.getResults().setPercentWednesday(0.3);
+    	$res.getResults().setPercentThursday(0.3);
+    	$res.getResults().setPercentFriday(0.3);
+    	$res.getResults().setPercentSaturday(0.3);
+end
+
+rule "group MANOS match"
+    when
+    	$tcIdMap : TCIDMap()
+    	$res : Reservation()
+    	$travelAgent: TravelAgent($tcId : travelConsultId != null && $tcIdMap[$tcId] contains "MANOS") from $res.getTravelAgent()
+    then
+    	System.out.println("----> rule [" + drools.getRule().getName() + "] for " + $res);
+    	$res.getResults().setPercentSunday(0.4);
+    	$res.getResults().setPercentMonday(0.4);
+    	$res.getResults().setPercentTuesday(0.4);
+    	$res.getResults().setPercentWednesday(0.4);
+    	$res.getResults().setPercentThursday(0.4);
+    	$res.getResults().setPercentFriday(0.4);
+    	$res.getResults().setPercentSaturday(0.4);
+end

@@ -9,7 +9,7 @@ public class TestProcess {
 
     @Test
     public void testSampleProcess() {
-        KieContainer kc = KieServices.get().newKieClasspathContainer();
+        KieContainer kc = KieServices.get().getKieClasspathContainer();
         KieSession ks = kc.newKieSession();
         
         ks.startProcess("sample-process");
